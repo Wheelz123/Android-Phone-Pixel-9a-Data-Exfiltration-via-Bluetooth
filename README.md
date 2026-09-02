@@ -42,7 +42,12 @@ other indication on the phone at the time of extraction.
 ## Repository layout
 
 ```
-└── README.md    # this file
+├── README.md      # this file
+├── Cargo.toml     # Rust package manifest (binary: obex-map-get)
+├── Cargo.lock     # locked dependency versions
+├── .gitignore
+└── src/
+    └── main.rs    # OBEX MAP/PBAP exfiltration tool source
 ```
 
 ---
@@ -50,7 +55,7 @@ other indication on the phone at the time of extraction.
 ## Build
 
 ```bash
-cd ~/pixel_vrp_repro/
+cd ~/Android-Phone-Pixel-9a-Research-Bluetooth-Data-Extraction/
 sudo apt update
 sudo apt install -y build-essential pkg-config libbluetooth-dev libssl-dev cargo bluez
 sudo apt install bluez libbluetooth-dev build-essential cargo hexdump

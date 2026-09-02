@@ -101,7 +101,7 @@ With the phone plugged in via usb and usb debugging enabled, we now execute the 
 ```
 adb logcat -v time | grep -E "BluetoothMapObexServer|UserManagerService" 
 ```
-This will enable logging off system messages from the android device
+This will enable logging of system messages from the android device
 
 Next we must execute: 
 

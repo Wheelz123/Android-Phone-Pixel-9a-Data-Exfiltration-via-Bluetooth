@@ -57,8 +57,7 @@ other indication on the phone at the time of extraction.
 ```bash
 cd ~/Android-Phone-Pixel-9a-Research-Bluetooth-Data-Extraction/
 sudo apt update
-sudo apt install -y build-essential pkg-config libbluetooth-dev libssl-dev cargo bluez
-sudo apt install bluez libbluetooth-dev build-essential cargo hexdump
+sudo apt install -y build-essential pkg-config libbluetooth-dev libssl-dev cargo bluez adb
 cargo build --release
 ```
 

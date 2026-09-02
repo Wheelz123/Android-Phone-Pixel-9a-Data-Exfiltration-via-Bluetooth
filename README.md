@@ -122,3 +122,29 @@ adb logcat | grep [Enter PID prior step here]
 <img width="955" height="49" alt="image" src="https://github.com/user-attachments/assets/4d08878a-1577-47a7-9370-10e30beda272" />
 
 In this image, we see evidence of the unexpected state transition. 
+
+To understand this, we must examine the following states found in BluetoothProfile.java android documentation: 
+
+1. STATE_DISCONNECTED = 0 
+2. STATE_CONNECTING = 1 (This is where security checks take place) 
+3. STATE CONNECTED = 2 (This means data is now flowing) 
+4. STATE DISCONNECTING = 3
+
+See here for reference to these states in android google source code. https://android.googlesource.com/platform/frameworks/base/+/010bf37/core/java/android/bluetooth/BluetoothProfile.java
+
+What the screenshot is saying is that there was an unexpected transition from state 0 to state 2. What this means is that state 1, or STATE_CONNECTING was bypassed.  The significance of [0 -> 2] is that the system is reporting that the MAP profile skipped State 1 entirely. 
+
+Also, the following code in the com.android.bluetooth.btservice we see the following code block
+
+<img width="1235" height="118" alt="image" src="https://github.com/user-attachments/assets/a4468991-6166-4710-8c2b-71319a967173" />
+
+In it, we see the debug log code that states, 
+if (!isNormalStateTransition(i3, i2) { 
+	Log.w(TAG, “updateOnProfileConnectionChanged: Unexpected transition. ” + str);
+
+
+This line of code correlates to the message that I am once again pasting below. It demonstrates that this is not a normal state transition. 
+
+<img width="955" height="49" alt="image" src="https://github.com/user-attachments/assets/9d5f72f5-b638-43f3-adb1-44169a8966c8" />
+
+The full impact of this unexpected transition is indeterminate at this moment. 

@@ -23,7 +23,7 @@ This repo is based on 74 pages of research that I submitted to google during the
 
 This tool demonstrates an insider-threat scenario: someone with legitimate —
 often temporary — access to a device establishes a Bluetooth pairing record,
-then extracts message metadata much later, without the owner's knowledge.
+then extracts message data much later, without the owner's knowledge.
 
 Examples:
 

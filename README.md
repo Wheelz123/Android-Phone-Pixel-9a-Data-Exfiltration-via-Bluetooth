@@ -1,9 +1,9 @@
 # Pixel 9a Bluetooth MAP and PBAP Research
 
-Research and tooling for a design-level authorization gap in Android's Message Access Profile (MAP) and Phone Book Access Profile (PBAP) implementation on the Google Pixel 9a (The code base has been tested on a Pixel 6a. It is assumed that this code base will work on any Android phone, but testing has not taken place outside of Pixel phones): a previously bonded Bluetooth device can silently retrieve text messages, phone numbers, contact names, and  with no on-device
-notification and no per-session consent prompt.
+Research and tooling for a design-level authorization gap in Android's Message Access Profile (MAP) and Phone Book Access Profile (PBAP) implementation on the Google Pixel 9a. The code base has been tested on a Pixel 6a. It is assumed that this code base will work on any Android phone, but testing has not taken place outside of Pixel phones. A previously bonded Bluetooth device can silently retrieve text messages, phone numbers, and contact names, with no on-device notification or consent prompts per session. 
 
-This repo is based on 74 pages of research that I submitted to google. The concept of this research was taking a bluetooth profile that was originally created to exchange information over a vehicle infotainment system, and then adapting that profile to sync with a linux computer vs an infotainment system. The result is that personally identifiable information is synced in a linux terminal. During the course of this research, I also found an unexpected state transition in com.android.bluetooth.btservice. To reproduce this unexpected state transition log, instructions are also provided on top of the data exfiltration. 
+This repo is based on 74 pages of research that I submitted to google. The concept of this research was taking a bluetooth profile that was originally created to exchange information over a vehicle infotainment system, and then adapting that profile to sync with a linux computer. The result is that personally identifiable information is synced in a linux computer terminal. During the course of this research, I also found an unexpected state transition in com.android.bluetooth.btservice. To reproduce this unexpected state transition log, instructions are also provided.
+
 ---
 
 ## TL;DR

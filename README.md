@@ -1,10 +1,9 @@
-# Pixel 9a Bluetooth MAP Research
+# Pixel 9a Bluetooth MAP and PBAP Research
 
-Research and tooling for a design-level authorization gap in Android's Message
-Access Profile (MAP) implementation on the Google Pixel 9a: a previously bonded
-Bluetooth device can silently retrieve SMS/MMS metadata with no on-device
+Research and tooling for a design-level authorization gap in Android's Message Access Profile (MAP) and Phone Book Access Profile (PBAP) implementation on the Google Pixel 9a (The code base has been tested on a Pixel 6a. It is assumed that this code base will work on any Android phone, but testing has not taken place outside of Pixel phones): a previously bonded Bluetooth device can silently retrieve text messages, phone numbers, contact names, and  with no on-device
 notification and no per-session consent prompt.
 
+This repo is based on 74 pages of research that I submitted to google. The concept of this research was taking a bluetooth profile that was originally created to exchange information over a vehicle infotainment system, and then adapting that profile to sync with a linux computer vs an infotainment system. The result is that personally identifiable information is synced in a linux terminal. During the course of this research, I also found an unexpected state transition in the 
 ---
 
 ## TL;DR
@@ -90,7 +89,7 @@ Settings -> Connected devices -> Select paired computer -> Disconnect
 
 Run the command again without the connection. The exfiltration of a text
 message, phone number, and sender name prints to the terminal with no
-notification, pop-up, or other indication on the phone:
+notification, pop-up, or other indication on the phone. The phone does not need to be connected via bluetooth after the initial pairing in order for the data exfiltration to occur in the future.:
 
 ```bash
 ./target/release/obex-map-get [PIXEL_MAC] 4 --repeat=1 --preview-body=512

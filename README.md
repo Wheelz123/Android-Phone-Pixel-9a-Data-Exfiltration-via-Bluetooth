@@ -134,7 +134,7 @@ See here for reference to these states in android google source code. https://an
 
 What the screenshot is saying is that there was an unexpected transition from state 0 to state 2. What this means is that state 1, or STATE_CONNECTING was bypassed.  The significance of [0 -> 2] is that the system is reporting that the MAP profile skipped State 1 entirely. 
 
-Also, the following code in the com.android.bluetooth.btservice we see the following code block
+Also, examining the code in the com.android.bluetooth.btservice we see the following code block
 
 <img width="1235" height="118" alt="image" src="https://github.com/user-attachments/assets/a4468991-6166-4710-8c2b-71319a967173" />
 

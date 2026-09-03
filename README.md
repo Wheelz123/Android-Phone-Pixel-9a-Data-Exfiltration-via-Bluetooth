@@ -82,7 +82,7 @@ user must allow message access, after which text-message data is extracted):
 > **Note:** Sometimes this command fails to output the XML data. If so, run:
 
 ```bash
-stdbuf -i0 -o0 -e0 ./target/release/obex-map-get [PIXEL_MAC] [MAP CHANNEL] --repeat=1 --preview-body=5000 --output=evidence.bin
+stdbuf -i0 -o0 -e0 ./target/release/obex-map-get [PIXEL_MAC] [MAP_CH] --repeat=1 --preview-body=5000 --out-dir=evidence
 ```
 
 After pairing, disconnect the computer from the phone:

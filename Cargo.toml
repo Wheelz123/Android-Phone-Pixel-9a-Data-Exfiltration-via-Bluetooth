@@ -2,6 +2,10 @@
 name = "obex-map-get"
 version = "0.1.0"
 edition = "2021"
+description = "OBEX MAP/PBAP message retrieval research tool (Pixel 9a Bluetooth)"
+license = "AGPL-3.0-or-later"
+authors = ["Wheelz123"]
+repository = "https://github.com/Wheelz123/Android-Phone-Pixel-9a-Research-Bluetooth-Data-Extraction"
 
 [dependencies]
 libc = "0.2"

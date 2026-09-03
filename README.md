@@ -67,7 +67,7 @@ cargo build --release
 
 ## Usage
 
-Important: The PIXEL_MAC address refers to the phone's Bluetooth MAC address. In order to find this, make sure Bluetooth is enabled on the phone, then run `bluetoothctl` on the attacking machine and enter `scan on`. Wait for the phone to appear in the scan output (e.g. `Device XX:XX:XX:XX:XX:XX Pixel 9a`) and copy its MAC address. Then enter `scan off` and `exit` to leave bluetoothctl.
+Important: The PIXEL_MAC address refers to the phone's Bluetooth MAC address. In order to find this, make sure Bluetooth is enabled on the phone, then run `bluetoothctl` on your computer and enter `scan on`. Wait for the phone to appear in the scan output (e.g. `Device XX:XX:XX:XX:XX:XX Pixel 9a`) and copy its MAC address. Then enter `scan off` and `exit` to leave bluetoothctl.
 
 Extract the MAP channel for the target device:
 

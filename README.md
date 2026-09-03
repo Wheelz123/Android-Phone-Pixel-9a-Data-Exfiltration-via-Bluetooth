@@ -49,6 +49,7 @@ other indication on the phone at the time of extraction.
 ├── README.md      # this file
 ├── Cargo.toml     # Rust package manifest (binary: obex-map-get)
 ├── Cargo.lock     # locked dependency versions
+├── LICENSE        # GNU AGPL v3.0 license
 ├── .gitignore
 └── src/
     └── main.rs    # OBEX MAP/PBAP exfiltration tool source

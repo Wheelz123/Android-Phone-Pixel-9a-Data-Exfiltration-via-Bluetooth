@@ -12,7 +12,7 @@ This repo is based on 74 pages of research that I submitted to google during the
 
 | Item | Value |
 |---|---|
-| Target service | `com.android.bluetooth.map.BluetoothMapObexServer`, RFCOMM channel 4 (subject to change per update) |
+| Target service | `com.android.bluetooth.map.BluetoothMapObexServer`, RFCOMM channel 5 (subject to change per update) |
 | Behavior | Bonded device silently retrieves SMS/MMS metadata |
 | Data exposed | Sender names, phone numbers, timestamps, message handles (metadata) |
 | User interaction | None after pairing (no notification, no consent prompt) |

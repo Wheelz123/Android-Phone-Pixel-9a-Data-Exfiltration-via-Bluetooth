@@ -66,8 +66,9 @@ cargo build --release
 ## Usage
 
 > **Important:** `[PIXEL_MAC]` in every command below is the phone's **Bluetooth
-> MAC address**, NOT its WiFi MAC. These are two different addresses, and Android
-> randomizes both of them on modern devices. You can find the phone's real
+> MAC address**, NOT its WiFi MAC. These are two different addresses — the
+> Bluetooth MAC is a stable hardware address (it does not rotate like the
+> randomized MAC Android uses per WiFi network). You can find the phone's
 > Bluetooth address on the phone under `Settings -> About phone -> Status`, or in
 > `Developer options` while the Bluetooth settings screen is open. During initial
 > pairing, `bluetoothctl devices` on the computer will also list the bonded

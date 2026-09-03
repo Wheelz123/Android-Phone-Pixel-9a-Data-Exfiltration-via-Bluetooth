@@ -16,7 +16,7 @@ This repo is based on 74 pages of research that I submitted to google during the
 | Behavior | Bonded device silently retrieves SMS/MMS metadata |
 | Data exposed | Sender names, phone numbers, timestamps, message handles (metadata) |
 | User interaction | None after pairing (no notification, no consent prompt) |
-| Confirmed on | Android 17, Pixel 9a, build `CP2A.260705.006` |
+| Confirmed on | Android 17, Pixel 9a, build `CP2A.260805.005` (latest available) |
 | Classification | Design-level authorization gap |
 
 ---

@@ -189,7 +189,6 @@ This line of code correlates to the message that I am once again pasting below. 
 
 <img width="955" height="49" alt="image" src="https://github.com/user-attachments/assets/9d5f72f5-b638-43f3-adb1-44169a8966c8" />
 
-The full impact of this unexpected transition is indeterminate at this moment. 
 
 ---
 

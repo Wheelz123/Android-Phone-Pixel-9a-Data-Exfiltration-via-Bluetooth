@@ -65,14 +65,7 @@ cargo build --release
 
 ## Usage
 
-> **Important:** `[PIXEL_MAC]` in every command below is the phone's **Bluetooth
-> MAC address**, NOT its WiFi MAC. These are two different addresses — the
-> Bluetooth MAC is a stable hardware address (it does not rotate like the
-> randomized MAC Android uses per WiFi network). You can find the phone's
-> Bluetooth address on the phone under `Settings -> About phone -> Status`, or in
-> `Developer options` while the Bluetooth settings screen is open. During initial
-> pairing, `bluetoothctl devices` on the computer will also list the bonded
-> phone's Bluetooth MAC.
+Important: The PIXEL_MAC address refers to the phone's Bluetooth MAC address. In order to find this, make sure Bluetooth is enabled on the phone, then run `bluetoothctl` on the attacking machine and enter `scan on`. Wait for the phone to appear in the scan output (e.g. `Device XX:XX:XX:XX:XX:XX Pixel 9a`) and copy its MAC address. Then enter `scan off` and `exit` to leave bluetoothctl.
 
 Extract the MAP channel for the target device:
 

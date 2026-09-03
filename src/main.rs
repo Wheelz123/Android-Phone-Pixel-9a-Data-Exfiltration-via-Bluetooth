@@ -613,6 +613,7 @@ struct MapGetTelemetry {
     connect_rtt_ms: Option<i128>,
     get_rtt_ms: Option<i128>,
     error: Option<String>,
+    body_full: Option<Vec<u8>>,
 }
 
 fn main() -> anyhow::Result<()> {
@@ -631,6 +632,12 @@ fn main() -> anyhow::Result<()> {
     let json_out: bool = args.iter().any(|a| a == "--json");
     let csv_path: Option<String> = args.iter().skip(1).find_map(|a| if a.starts_with("--csv=") { Some(a[6..].to_string()) } else { None });
     let out_dir: Option<String> = args.iter().skip(1).find_map(|a| if a.starts_with("--out-dir=") { Some(a[10..].to_string()) } else { None });
+    if let Some(dir) = &out_dir {
+        if let Err(e) = std::fs::create_dir_all(dir) {
+            eprintln!("warning: could not create out-dir '{}': {}", dir, e);
+        }
+    }
+    let output_path: Option<String> = args.iter().skip(1).find_map(|a| if a.starts_with("--output=") { Some(a[9..].to_string()) } else { None });
     let append: bool = args.iter().any(|a| a == "--append");
     let redact: bool = args.iter().any(|a| a == "--redact");
     let out_prefix: String = args.iter().skip(1).find_map(|a| if a.starts_with("--out-prefix=") { Some(a[13..].to_string()) } else { None }).unwrap_or_else(|| "mapget".to_string());
@@ -677,6 +684,16 @@ fn main() -> anyhow::Result<()> {
             }
             runs.push(tele);
             if sleep_ms > 0 && i + 1 < repeat { std::thread::sleep(Duration::from_millis(sleep_ms)); }
+        }
+
+        // Write the raw message-listing body of the first successful run to --output=FILE
+        if let Some(path) = &output_path {
+            if let Some(body) = runs.iter().find_map(|t| t.body_full.clone()).filter(|b| !b.is_empty()) {
+                std::fs::write(path, &body)?;
+                if !json_out { println!("Saved raw message listing ({} bytes) to {}", body.len(), path); }
+            } else {
+                eprintln!("--output: no successful response body to save");
+            }
         }
 
         // Determine default output paths if requested
@@ -769,6 +786,7 @@ fn print_help() {
     println!("  --json          Emit JSON with runs + summary");
     println!("  --no-stdout-json Suppress JSON on stdout (still writes file if --out-dir)");
     println!("  --csv=FILE      Write CSV to FILE (append requires --append)");
+    println!("  --output=FILE   Save the raw message-listing body of the first successful run to FILE");
     println!("  --out-dir=DIR   Auto-save CSV/JSON to DIR with timestamped names");
     println!("  --out-prefix=P  Prefix for auto-saved files (default 'mapget')");
     println!("  --append        Append to CSV instead of overwriting");
@@ -777,7 +795,7 @@ fn print_help() {
 
 #[cfg(target_os = "linux")]
 fn run_once(mac: &str, channel: u8, timeout: Duration, max_list_count: u16, start_offset: u16, preview_len: usize) -> MapGetTelemetry {
-    let mut tele = MapGetTelemetry { connect_code: None, get_code: None, content_type: None, body_len: 0, body_preview: None, connect_rtt_ms: None, get_rtt_ms: None, error: None };
+    let mut tele = MapGetTelemetry { connect_code: None, get_code: None, content_type: None, body_len: 0, body_preview: None, connect_rtt_ms: None, get_rtt_ms: None, error: None, body_full: None };
     let transport = match BluezSocketTransport::connect(mac, channel, timeout) {
         Ok(t) => t,
         Err(e) => { tele.error = Some(e.to_string()); return tele; }
@@ -815,5 +833,6 @@ fn run_once(mac: &str, channel: u8, timeout: Duration, max_list_count: u16, star
         tele.body_preview = Some(s);
     }
     tele.body_len = total_body.len();
+    tele.body_full = Some(total_body);
     tele
 }

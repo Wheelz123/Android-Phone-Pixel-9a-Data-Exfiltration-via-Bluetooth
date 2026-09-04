@@ -171,7 +171,7 @@ adb logcat | grep [Enter PID prior step here]
 ```
 <img width="944" height="52" alt="image" src="https://github.com/user-attachments/assets/a3d60c5c-3a79-4161-ba42-b6670d022220" />
 
-In this image, we see evidence of the unexpected state transition. 
+In this image, we see evidence of the unexpected state transition. Note: you will have to scroll through the log to find the unexpected transition log.
 
 To understand this, we must examine the following states found in BluetoothProfile.java android documentation: 
 

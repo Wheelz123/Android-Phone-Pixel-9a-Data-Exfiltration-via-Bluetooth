@@ -83,12 +83,11 @@ echo "MAP Channel: $MAP_CHANNEL"
 
 Optionally, If the command above comes back empty, dump the target's full SDP record list and read the channel by hand. You will need to find the profile that says something like 'Message Access - MAS,' 'SMS/MMS,' or 'MAP.' Additionally, a profile that displays the uuid of 0x1132 will be the profile you are looking for. The RFCOMM channel is the number you are looking for. In this case, it once again is 5.
 
-<img width="477" height="269" alt="image" src="https://github.com/user-attachments/assets/e09a2adc-725c-4cab-8396-7320c93ed7fd" />
-
-
 ```bash
 sdptool -i hci0 browse [PIXEL_MAC]
 ```
+
+<img width="477" height="269" alt="image" src="https://github.com/user-attachments/assets/e09a2adc-725c-4cab-8396-7320c93ed7fd" />
 
 Now that you have the MAP channel and the MAC address, run the exfiltration tool (this triggers a pairing pop-up on the target — the user must allow message access, after which text-message data is extracted):
 

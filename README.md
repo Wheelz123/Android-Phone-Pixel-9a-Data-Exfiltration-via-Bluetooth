@@ -169,7 +169,7 @@ In the first command it was determined that the process id was 2161, so the next
 ```
 adb logcat | grep [Enter PID prior step here]
 ```
-<img width="955" height="49" alt="image" src="https://github.com/user-attachments/assets/4d08878a-1577-47a7-9370-10e30beda272" />
+<img width="944" height="52" alt="image" src="https://github.com/user-attachments/assets/a3d60c5c-3a79-4161-ba42-b6670d022220" />
 
 In this image, we see evidence of the unexpected state transition. 
 

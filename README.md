@@ -72,7 +72,7 @@ cargo build --release
 
 Important: The PIXEL_MAC address refers to the phone's Bluetooth MAC address. In order to find this, make sure Bluetooth is enabled on the phone, then run `bluetoothctl` on your computer and enter `scan on`. Wait for the phone to appear in the scan output (e.g. `Device XX:XX:XX:XX:XX:XX Pixel 9a`) and copy its MAC address. Then enter `scan off` and `exit` to leave bluetoothctl.
 
-Extract the MAP channel for the target device:
+Extract the MAP channel for the target device. (Note: at this time the channel is 5):
 
 ```bash
 MAP_CHANNEL=$(sdptool -i hci0 browse [PIXEL_MAC] | grep -A 8 "0x1132" | grep -oP "Channel: \K[0-9]+")

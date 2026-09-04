@@ -105,8 +105,6 @@ notification, pop-up, or other indication on the phone. The phone does not need 
 ```bash
 ./target/release/obex-map-get [PIXEL_MAC] [MAP_CHANNEL] --repeat=1 --preview-body=512
 ```
-The output should look like the following: 
-(Phone numbers have been redacted. Both devices are my test devices.)
 
 ## Flag reference
 

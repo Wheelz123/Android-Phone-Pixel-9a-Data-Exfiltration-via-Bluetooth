@@ -195,8 +195,7 @@ if (!isNormalStateTransition(i3, i2) {
 
 This line of code correlates to the message that I am once again pasting below. It demonstrates that this is not a normal state transition. 
 
-<img width="955" height="49" alt="image" src="https://github.com/user-attachments/assets/9d5f72f5-b638-43f3-adb1-44169a8966c8" />
-
+<img width="944" height="52" alt="image" src="https://github.com/user-attachments/assets/0bb664f1-fb1b-4ef2-b660-242daf8b463f" />
 
 ---
 

@@ -105,6 +105,11 @@ notification, pop-up, or other indication on the phone. The phone does not need 
 ```bash
 ./target/release/obex-map-get [PIXEL_MAC] [MAP_CHANNEL] --repeat=1 --preview-body=512
 ```
+The output should look like the following
+
+<img width="1630" height="146" alt="image" src="https://github.com/user-attachments/assets/ea5c951c-5a4a-4885-8bb3-029c635b287a" />
+
+Note: The Bluetooth MAC address and test phone numbers have been redacted. Both devices are my test devices.
 
 ## Flag reference
 

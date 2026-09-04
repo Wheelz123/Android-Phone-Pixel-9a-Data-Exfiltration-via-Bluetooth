@@ -140,16 +140,6 @@ Note: The Bluetooth MAC address and test phone numbers have been redacted. Both 
 | `--out-prefix=P` | mapget | Filename prefix for auto-saved files |
 | `--redact` | off | Mask codes/errors and zero the body preview (for shareable output) |
 
-Examples:
-
-```bash
-# Collect 10 runs, 2 seconds apart, saving redacted evidence files
-./target/release/obex-map-get [PIXEL_MAC] [MAP_CHANNEL] --repeat=10 --sleep-ms=2000 --out-dir=evidence --redact
-
-# Machine-readable single run for scripting
-./target/release/obex-map-get [PIXEL_MAC] [MAP_CHANNEL] --repeat=1 --json
-```
-
 ---
 
 ## Unexpected state transition

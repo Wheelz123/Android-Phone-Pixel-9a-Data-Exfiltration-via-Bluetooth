@@ -75,7 +75,7 @@ Important: The PIXEL_MAC address refers to the phone's Bluetooth MAC address. In
 Extract the MAP channel for the target device:
 
 ```bash
-MAP_CHANNEL=$(sdptool -i hci0 browse [PIXEL_MAC] | grep -A 5 "Message Access" | grep "Channel" | grep -o "[0-9]*")
+MAP_CHANNEL=$(sdptool -i hci0 browse [PIXEL_MAC] | grep -A 8 "0x1132" | grep -oP "Channel: \K[0-9]+")
 echo "MAP Channel: $MAP_CHANNEL"
 ```
 

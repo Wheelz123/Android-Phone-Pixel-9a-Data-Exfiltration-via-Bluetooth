@@ -144,7 +144,13 @@ Note: The Bluetooth MAC address and test phone numbers have been redacted. Both 
 
 ## Unexpected state transition
 
-To test for the state transition during extraction, follow these steps:
+Prerequisite: enable Developer Options and USB debugging. USB debugging is hidden by default. On the phone:
+
+1. Open Settings → About phone
+2. Tap Build number seven times until it says "You are now a developer."
+3. Go to Settings → System (or System & updates) → Developer options and toggle **USB debugging** on.
+4. On first connection, tap **Allow** on the phone's "Allow USB debugging?" prompt.
+Note: USB debugging is only required for the state transition log below. The MAP extraction tool (`obex-map-get`) connects over Bluetooth and does not need it.
 
 With the phone plugged in via usb and usb debugging enabled, we now execute the following command:
 

@@ -169,7 +169,7 @@ In the first command it was determined that the process id was 2161, so the next
 ```
 adb logcat | grep [Enter PID prior step here]
 ```
-<img width="944" height="52" alt="image" src="https://github.com/user-attachments/assets/a3d60c5c-3a79-4161-ba42-b6670d022220" />
+<img width="955" height="49" alt="image" src="https://github.com/user-attachments/assets/a56782b0-71d2-48ea-8a88-40c9ee07972a" />
 
 In this image, we see evidence of the unexpected state transition. Note: you will have to scroll through the log to find the unexpected transition log.
 
@@ -195,7 +195,7 @@ if (!isNormalStateTransition(i3, i2) {
 
 This line of code correlates to the message that I am once again pasting below. It demonstrates that this is not a normal state transition. 
 
-<img width="944" height="52" alt="image" src="https://github.com/user-attachments/assets/0bb664f1-fb1b-4ef2-b660-242daf8b463f" />
+<img width="955" height="49" alt="image" src="https://github.com/user-attachments/assets/404e34dc-16b1-4ce7-a68b-a99789b2127e" />
 
 ---
 
